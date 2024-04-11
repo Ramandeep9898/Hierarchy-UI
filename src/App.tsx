@@ -1,10 +1,7 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
-
-const Home = () => {
-  return <>home</>;
-};
+import { Home } from "./pages";
 
 const queryClient = new QueryClient({
   defaultOptions: {
