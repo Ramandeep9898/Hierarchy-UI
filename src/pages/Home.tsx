@@ -33,6 +33,7 @@ export const Home = () => {
     dispatch({ ...formData, type: "ADD_MEMBER" });
   };
 
+  /// create new team
   const onSubmitCreateTeam = (formData) => {
     console.log(formData);
   };
@@ -42,37 +43,39 @@ export const Home = () => {
   }, [employeeData]);
 
   return (
-    <main className="flex justify-center items-center flex-wrap gap-3">
-      <div className="flex flex-col">
+    <main className="flex justify-center items-center flex-wrap gap-3 ">
+      <div className="flex flex-col max-w-[1200px]">
         {Object.keys(employeeTransformedData).map((department) => (
           <div key={department} className="mb-5">
             <div className="flex justify-between mb-3">
               <h2 className="text-2xl font-bold underline ">{department}</h2>
-              <div className="flex gap-3">
-                <Sheet>
-                  <SheetTrigger>
-                    <Button variant="primary">Add New Team Member +</Button>
-                  </SheetTrigger>
-                  <DynamicSheet
-                    department={department}
-                    config={ADD_MEMBER_FIELDS_CONFIG}
-                    initialState={initialState}
-                    onSubmit={onSubmitTeamMember}
-                  />
-                </Sheet>
+              {department !== "LEADERSHIP" && (
+                <div className="flex gap-3">
+                  <Sheet>
+                    <SheetTrigger>
+                      <Button variant="primary">Add New Team Member +</Button>
+                    </SheetTrigger>
+                    <DynamicSheet
+                      department={department}
+                      config={ADD_MEMBER_FIELDS_CONFIG}
+                      initialState={initialState}
+                      onSubmit={onSubmitTeamMember}
+                    />
+                  </Sheet>
 
-                <Sheet>
-                  <SheetTrigger>
-                    <Button variant="primary">Create New Team +</Button>
-                  </SheetTrigger>
-                  <DynamicSheet
-                    department={department}
-                    config={CREATE_TEAM_CONFIG}
-                    initialState={createTeamInitialState}
-                    onSubmit={onSubmitCreateTeam}
-                  />
-                </Sheet>
-              </div>
+                  <Sheet>
+                    <SheetTrigger>
+                      <Button variant="primary">Create New Team +</Button>
+                    </SheetTrigger>
+                    <DynamicSheet
+                      department={department}
+                      config={CREATE_TEAM_CONFIG}
+                      initialState={createTeamInitialState}
+                      onSubmit={onSubmitCreateTeam}
+                    />
+                  </Sheet>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-row gap-2 flex-wrap">
