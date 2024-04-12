@@ -36,7 +36,6 @@ export const Dropdown = ({
 
     if (initialDropdownValue === "Choose a Team") {
       // Create an array of all the teams in this department {department}
-      console.log(dept, employeeData);
 
       setTeamData(getTeamByDepartmentName(dept as string, employeeData));
     }

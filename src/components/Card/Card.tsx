@@ -6,8 +6,6 @@ import { DynamicSheet } from "../SideSheet/DynamicSheet";
 import { ADD_MEMBER_FIELDS_CONFIG } from "../../config";
 
 export const Card = ({ info }) => {
-  console.log("info", info);
-
   return (
     <div
       className={clsxm(
@@ -37,7 +35,7 @@ export const Card = ({ info }) => {
             </SheetTrigger>
             <DynamicSheet
               department={info.departmentName}
-              flag="addMember"
+              flag="edit"
               config={ADD_MEMBER_FIELDS_CONFIG}
               initialState={info}
               onSubmit={() => "fghj"}

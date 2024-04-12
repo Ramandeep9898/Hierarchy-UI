@@ -46,24 +46,21 @@ export const addMember = (memberData, employeeData) => {
 
   // Push the new member object to the employees array
   employees.push(newMember);
+  localStorage.setItem("employees", JSON.stringify(employees));
 
   "New Member Added:", employees, memberData;
 };
 
 export const createTeam = (teamData, employeeData) => {
-  "teamData Id", teamData.teamId;
-  "employeeData", employeeData;
   const { teams, department } = employeeData;
   const departmentId = getDepartmentByDeptName(teamData.department, department);
-  "departmentId", departmentId;
 
   // Construct the new team object with all required properties
   const newTeam = { ...teamData, deptId: departmentId };
 
   // Push the new team object to the employees array
   teams[teamData.teamId] = newTeam;
-
-  "New team Added:", teams, teamData;
+  localStorage.setItem("teams", JSON.stringify(teams));
 };
 
 export const getDepartmentByDeptName = (deptName, department) => {

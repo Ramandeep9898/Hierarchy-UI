@@ -4,6 +4,7 @@ import { Chip } from "../Chip/Chip";
 import { Input } from "../Input/Input";
 import { Dropdown } from "../DropDown/DropDown";
 import { v4 as uuid } from "uuid";
+import { useEmployeeData } from "../../hooks/employeeDataContext";
 
 import { useState } from "react";
 
@@ -22,8 +23,9 @@ export const DynamicSheet = ({
   onSubmit,
   flag,
 }: SheetPropsTypes) => {
+  const { employeeData, dispatch } = useEmployeeData();
+
   const [formData, setFormData] = useState<FormData>(initialState);
-  console.log(initialState);
   const handleInput = (key: string, value: string, teamId?: string) => {
     if (flag === "createTeam") {
       setFormData({
@@ -66,6 +68,16 @@ export const DynamicSheet = ({
     return componentOption[field.element];
   };
 
+  const submitHandler = () => {
+    if (flag === "edit") {
+      // call dispatch
+      // dispatch
+      console.log("formData", formData);
+    } else {
+      onSubmit({ formData });
+    }
+  };
+
   return (
     <SheetContent className="bg-white w-[400px] sm:w-[540px]">
       <SheetHeader>
@@ -80,7 +92,7 @@ export const DynamicSheet = ({
       </SheetHeader>
       <button
         className="w-full mt-6 bg-[#333] rounded-lg p-2 text-white"
-        onClick={() => onSubmit({ formData })}
+        onClick={submitHandler}
       >
         Add
       </button>
