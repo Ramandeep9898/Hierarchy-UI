@@ -46,6 +46,7 @@ export const addMember = (memberData, employeeData) => {
 
   // Push the new member object to the employees array
   employees.push(newMember);
+  localStorage.setItem("employees" , JSON.stringify(employees))
 
   console.log("New Member Added:", employees, memberData);
 };
@@ -63,6 +64,7 @@ export const createTeam = (teamData, employeeData) => {
   
     // Push the new team object to the employees array
     teams[teamData.teamId] = newTeam;
+    localStorage.setItem("teams" , JSON.stringify(teams))
   
     console.log("New team Added:", teams, teamData);
   };

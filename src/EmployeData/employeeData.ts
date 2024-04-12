@@ -19,7 +19,7 @@ export const department = {
   },
 };
 
-export const teams = {
+export const teams = JSON.parse(localStorage.getItem('teams') as string) || {
   "ba715d74-3241-48aa-8e0a-995029f76668": {
     teamName: "Hello Enginners!",
     deptId: "er715d74-3241-48aa-8e0a-995029a76668",
@@ -43,7 +43,7 @@ export const teams = {
   
 };
 
-export const employees = [
+export const employees = JSON.parse(localStorage.getItem('employees') as string) || [
   {
     employeeId: uuid(),
     name: "Ankur Pandey",
