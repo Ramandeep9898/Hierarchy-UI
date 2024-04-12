@@ -3,14 +3,7 @@ import { ADD_MEMBER_FIELDS_CONFIG } from "../../config";
 import { FormData, Field } from "../../types/Fields.type";
 import { Chip } from "../Chip/Chip";
 import { Input } from "../Input/Input";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../DropDown/DropDown";
+import { Dropdown } from "../DropDown/Dropdown";
 
 import { useState } from "react";
 
@@ -18,12 +11,14 @@ type SheetPropsTypes = {
   department: string;
   config: any;
   initialState: any;
+  onSubmit: any;
 };
 
 export const DynamicSheet = ({
   department,
   config,
   initialState,
+  onSubmit,
 }: SheetPropsTypes) => {
   const [formData, setFormData] = useState<FormData>(initialState);
 
@@ -38,28 +33,12 @@ export const DynamicSheet = ({
       chip: <Chip chipInfo={field} onChange={handleInput} />,
 
       dropdown: (
-        <DropdownMenu>
-          <div className="flex flex-col items-start w-full">
-            <div className="text-gray-500 text-sm mb-1">{field.label}</div>
-            <DropdownMenuTrigger className="border-[#333] w-full border-2 border-b-4 px-6 py-2 rounded-lg">
-              {formData.team}
-            </DropdownMenuTrigger>
-          </div>
-
-          <DropdownMenuContent className="w-[330px] border-[#333] border-2 border-b-4 bg-white">
-            <DropdownMenuSeparator />
-            <DropdownMenuRadioGroup
-              value={formData.team}
-              onValueChange={(value) => handleInput("team", value)}
-            >
-              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="bottom">
-                Bottom
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Dropdown
+          label={field.label}
+          name={formData[field.name]}
+          initialDropdownValue={field.initialDropdownValue}
+          onSelect={handleInput}
+        />
       ),
       input: (
         <Input
@@ -88,7 +67,10 @@ export const DynamicSheet = ({
           ))}
         </div>
       </SheetHeader>
-      <button className="w-full mt-6 bg-[#333] rounded-lg p-2 text-white">
+      <button
+        className="w-full mt-6 bg-[#333] rounded-lg p-2 text-white"
+        onClick={() => onSubmit(formData)}
+      >
         Add member
       </button>
     </SheetContent>

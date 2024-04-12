@@ -19,6 +19,11 @@ export const Home = () => {
     team: "choose a Team",
   };
 
+  // handle add/edit new member
+  const onSubmitTeamMember = (formData) => {
+    console.log(formData);
+  };
+
   const { employeeData, dispatch } = useEmployeeData();
   const [employeeTransformedData, setEmployeeTransformedData] = useState({});
 
@@ -41,6 +46,7 @@ export const Home = () => {
                     department={department}
                     config={ADD_MEMBER_FIELDS_CONFIG}
                     initialState={initialState}
+                    onSubmit={onSubmitTeamMember}
                   />
                 </Sheet>
 
@@ -50,6 +56,7 @@ export const Home = () => {
                     department={department}
                     config={CREATE_TEAM_CONFIG}
                     initialState={initialState}
+                    onSubmit={onSubmitTeamMember}
                   />
                 </Sheet>
               </div>

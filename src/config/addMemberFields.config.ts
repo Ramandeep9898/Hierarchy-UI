@@ -39,9 +39,10 @@ export const ADD_MEMBER_FIELDS_CONFIG = [
     ],
   },
   {
-    name: "chooseTeam",
+    name: "team",
     label: "Choose Team",
     element: "dropdown",
+    initialDropdownValue: "Choose a Team",
     required: true,
     options: [
       {
