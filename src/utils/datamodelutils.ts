@@ -49,3 +49,30 @@ export const addMember = (memberData, employeeData) => {
 
   console.log("New Member Added:", employees, memberData);
 };
+
+
+export const createTeam = (teamData, employeeData) => {
+    console.log("teamData Id", teamData.teamId);
+    console.log("employeeData", employeeData);
+    const { teams, department } = employeeData;
+    const departmentId = getDepartmentByDeptName(teamData.department, department);
+    console.log("departmentId", departmentId);
+  
+    // Construct the new team object with all required properties
+    const newTeam = {...teamData, deptId: departmentId};
+  
+    // Push the new team object to the employees array
+    teams[teamData.teamId] = newTeam;
+  
+    console.log("New team Added:", teams, teamData);
+  };
+  
+
+  export const getDepartmentByDeptName = (deptName, department) => {
+    for (let key of Object.keys(department)) {
+        let data = department[key];
+        if (deptName === data.deptName) {
+          return key;
+        }
+      }
+  }

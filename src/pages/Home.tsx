@@ -35,7 +35,8 @@ export const Home = () => {
 
   /// create new team
   const onSubmitCreateTeam = (formData) => {
-    console.log(formData);
+    console.log("TEAM_CREATE" ,formData);
+    dispatch({ ...formData, type: "CREATE_TEAM" });
   };
 
   useEffect(() => {
