@@ -1,64 +1,71 @@
-import { Input } from "../components/Input/Input";
-import { useState } from "react";
-import { ADD_MEMBER_FIELDS_CONFIG } from "../config";
-import { Field, FormData } from "../types/Fields.type";
-import { Chip } from "../components/Chip/Chip";
+import { useEffect, useState } from "react";
+import { ADD_MEMBER_FIELDS_CONFIG, CREATE_TEAM_CONFIG } from "../config";
 import { Toaster } from "../components/Toast/toaster";
-import { useToast } from "../components/Toast/use-toast";
+import { Card } from "../components/Card/Card";
+import { useEmployeeData } from "../hooks/employeeDataContext";
+import { DynamicSheet } from "../components/SideSheet/DynamicSheet";
+import { mapEmployeesByDepartment } from "../utils/mapEmployeesByDepartment";
+
+import { Sheet, SheetTrigger } from "../components/SideSheet/SideSheet";
+import { FormData } from "../types/Fields.type";
 
 export const Home = () => {
-  const { toast } = useToast();
-  const initialValue: FormData = {
-    nameId: "",
+  const initialState: FormData = {
+    name: "",
     phoneNumber: "",
     emailId: "",
     department: "",
-    position: "",
-  };
-  const [formData, setFormData] = useState<FormData>(initialValue);
-
-  const handleInput = (key: string, value: string) => {
-    setFormData({ ...formData, [key]: value });
-    console.log(formData);
+    designation: "",
+    team: "choose a Team",
   };
 
-  const addMember = () => {
-    console.log("ji");
-    toast({
-      title: "Scheduled: Catch up",
-      description: "Friday, February 10, 2023 at 5:57 PM",
-    });
-  };
+  const { employeeData, dispatch } = useEmployeeData();
+  const [employeeTransformedData, setEmployeeTransformedData] = useState({});
 
-  const DynamicComponentReturn: React.FC<{ field: Field }> = ({ field }) => {
-    const componentOption: { [key: string]: JSX.Element } = {
-      chip: <Chip chipInfo={field} onChange={handleInput} />,
-      input: (
-        <Input
-          label={field.label}
-          name={field.name}
-          value={formData[field.name]}
-          type={field.inputType || "text"}
-          required={field.required || false}
-          onChange={handleInput}
-        />
-      ),
-    };
-
-    return componentOption[field.element];
-  };
+  useEffect(() => {
+    setEmployeeTransformedData(mapEmployeesByDepartment(employeeData));
+  }, [employeeData]);
+  console.log("employeeTransformedData", employeeTransformedData);
 
   return (
-    <main className="flex justify-center items-center">
-      <div className="flex flex-col gap-7 p-4 border-2 rounded-lg">
-        {ADD_MEMBER_FIELDS_CONFIG.map((field) => (
-          <div className="" key={field.name}>
-            <DynamicComponentReturn field={field} />
+    <main className="flex justify-center items-center flex-wrap gap-3">
+      <div className="flex flex-col">
+        {Object.keys(employeeTransformedData).map((department) => (
+          <div key={department} className="mb-5">
+            <div className="flex justify-between mb-1">
+              <h2>{department}</h2>
+              <div className="flex gap-3">
+                <Sheet>
+                  <SheetTrigger>Add New Team Member</SheetTrigger>
+                  <DynamicSheet
+                    department={department}
+                    config={ADD_MEMBER_FIELDS_CONFIG}
+                    initialState={initialState}
+                  />
+                </Sheet>
+
+                <Sheet>
+                  <SheetTrigger>Create Team</SheetTrigger>
+                  <DynamicSheet
+                    department={department}
+                    config={CREATE_TEAM_CONFIG}
+                    initialState={initialState}
+                  />
+                </Sheet>
+              </div>
+            </div>
+
+            <div className="flex flex-row gap-2">
+              {employeeTransformedData[department].map((employee: any) => (
+                <div key={employee.employeeId}>
+                  <Card info={employee} />
+                </div>
+              ))}
+            </div>
           </div>
         ))}
-
-        <button onClick={addMember}>Add Member +</button>
       </div>
+
       <Toaster />
     </main>
   );

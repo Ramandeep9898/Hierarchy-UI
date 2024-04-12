@@ -1,7 +1,7 @@
 export const ADD_MEMBER_FIELDS_CONFIG = [
   {
-    name: "nameId",
-    label: "Name ID",
+    name: "name",
+    label: "Name",
     inputType: "text",
     element: "input",
     required: true,
@@ -23,29 +23,25 @@ export const ADD_MEMBER_FIELDS_CONFIG = [
     required: true,
   },
   {
-    name: "department",
-    label: "Department",
+    name: "designation",
+    label: "Designation",
     element: "chip",
     required: true,
     options: [
       {
-        name: "headOfStaff",
-        value: "Head of Staff/HR",
+        name: "TEAM_LEAD",
+        value: "Team Lead",
       },
       {
-        name: "headOfEngineering",
-        value: "Head of Engineering",
-      },
-      {
-        name: "headOfDesign",
-        value: "Head of Design",
+        name: "TEAM_MEMBER",
+        value: "Team Member",
       },
     ],
   },
   {
-    name: "position",
-    label: "Position",
-    element: "chip",
+    name: "chooseTeam",
+    label: "Choose Team",
+    element: "dropdown",
     required: true,
     options: [
       {
