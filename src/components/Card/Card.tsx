@@ -4,8 +4,16 @@ import Button from "../Button/Button";
 import { Sheet, SheetTrigger } from "../SideSheet/SideSheet";
 import { DynamicSheet } from "../SideSheet/DynamicSheet";
 import { ADD_MEMBER_FIELDS_CONFIG } from "../../config";
+import { useEmployeeData } from "../../hooks/employeeDataContext";
 
 export const Card = ({ info }) => {
+  const { employeeData, dispatch } = useEmployeeData();
+
+  // handle remove empolyee
+  const removeHandler = () => {
+    console.log(info.employeeId);
+    // dispatch
+  };
   return (
     <div
       className={clsxm(
@@ -55,11 +63,8 @@ export const Card = ({ info }) => {
         <div className="flex gap-2">
           {info.designation !== "TEAM_LEAD" && (
             <>
-              <Button variant="primary" className="">
+              <Button variant="primary" className="" onClick={removeHandler}>
                 Remove
-              </Button>
-              <Button variant="primary" className="">
-                Change team
               </Button>
             </>
           )}

@@ -42,6 +42,7 @@ export const Home = () => {
   useEffect(() => {
     setEmployeeTransformedData(mapEmployeesByDepartment(employeeData));
   }, [employeeData]);
+  console.log(employeeTransformedData);
 
   return (
     <main className="flex justify-center items-center flex-wrap gap-3 ">
@@ -83,9 +84,13 @@ export const Home = () => {
 
             <div className="flex flex-row gap-2 flex-wrap">
               {employeeTransformedData[department].map((employee: any) => (
-                <div key={employee.employeeId}>
-                  <Card info={employee} />
-                </div>
+                <>
+                  {!employee.isDeleted && (
+                    <div key={employee.employeeId}>
+                      <Card info={employee} />
+                    </div>
+                  )}
+                </>
               ))}
             </div>
           </div>
