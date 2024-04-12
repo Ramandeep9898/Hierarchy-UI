@@ -1,25 +1,59 @@
 import { department, teams } from "../../EmployeData/employeeData";
+import clsxm from "../../utils/clsxm";
+import Button from "../Button/Button";
 
 export const Card = ({ info }) => {
+  console.log(info);
   return (
-    <div className="border-[#333] border-2  border-b-4 rounded-xl px-6 py-3">
-      <h1 className="font-bold text-3xl text-[#333]">{info.name}</h1>
-      <h2 className="text-gray-600">
-        {info.email}· {info.phoneNumber}
-      </h2>
-      <div className="flex gap-2">
-        <Badge
-          variant={"department"}
-          title={department[info.deptId]?.deptName}
-        />
-        <Badge variant={"designation"} title={info.designation} />
-        <Badge variant={"team"} title={teams[info.teamId]?.teamName} />
+    <div
+      className={clsxm(
+        "border-[#333] border-2  border-b-4 rounded-xl px-6 py-3 w-[370px] h-[300px] flex flex-col justify-between",
+        info.designation === "HOD" && "bg-[#fec7de]",
+        info.designation === "TEAM_LEAD" && "bg-[#ffd464]",
+        info.designation === "CEO" && "bg-[#f85a2b]"
+      )}
+    >
+      <div className="">
+        <div className="flex justify-between items-center">
+          <div className="">
+            <h1 className="font-bold text-3xl text-[#333]">{info.name}</h1>
+            <h2 className="text-gray-600">
+              {info.email}· {info.phoneNumber}
+            </h2>
+          </div>
+          <Button
+            variant="outline"
+            className="border-[#333] border-2 px-2 py-1 rounded"
+          >
+            edit
+          </Button>
+        </div>
+
+        <div className="flex gap-2 flex-wrap mt-2">
+          <Badge variant={"designation"} title={info.designation} />
+          {teams[info.teamId]?.teamName && (
+            <Badge variant={"team"} title={teams[info.teamId]?.teamName} />
+          )}
+        </div>
       </div>
-      <div className="flex gap-2">
-        <button className="">Remove</button>
-        <button className="">change team</button>
-        <button className="">view team</button>
-      </div>
+
+      {info.designation !== "HOD" && "CEO" && (
+        <div className="flex gap-2">
+          {info.designation !== "TEAM_LEAD" && (
+            <>
+              <Button variant="primary" className="">
+                Remove
+              </Button>
+              <Button variant="primary" className="">
+                Change team
+              </Button>
+            </>
+          )}
+          <Button variant="primary" className="">
+            View team
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
@@ -50,15 +84,23 @@ const Badge = ({
 };
 
 const DepartmentBadge = ({ title }) => {
-  return <span className="jj">{title}</span>;
+  return <span className=""> {title}</span>;
 };
 
 const DesignationBadge = ({ title }) => {
-  return <span className="">{title}</span>;
+  return (
+    <span className="border-[#333] border-2 px-1 rounded-md bg-white whitespace-nowrap">
+      Designation: {title}
+    </span>
+  );
 };
 
 const TeamBadge = ({ title }) => {
-  return <span className="default-badge">{title}</span>;
+  return (
+    <span className="border-[#333] border-2 px-1 rounded-md bg-white whitespace-nowrap">
+      Team: {title}
+    </span>
+  );
 };
 
 export default Badge;

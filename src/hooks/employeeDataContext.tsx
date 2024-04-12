@@ -3,8 +3,6 @@ import { employees, teams, department } from "../EmployeData/employeeData";
 import { addMember } from "../utils/datamodelutils";
 
 const employeeReducerFunc = (state, action) => {
-  console.log("DISPATCH", state, action);
-  
   switch (action.type) {
     case "UPDATE_FIELD":
       return {
@@ -12,10 +10,13 @@ const employeeReducerFunc = (state, action) => {
         [action.field]: action.value,
       };
     case "ADD_MEMBER":
-      console.log("HEEEE");
-      addMember(action , state)
-      return state
-      // return addMember(action , "state")
+      // Call addMember function with proper arguments
+      const updatedState = {
+        ...state,
+        employees: [...state.employees], // Make a copy of the employees array
+      };
+      addMember(action.formData, updatedState); // Pass memberData and updatedState
+      return updatedState; // Return the updated state
     default:
       return state;
   }

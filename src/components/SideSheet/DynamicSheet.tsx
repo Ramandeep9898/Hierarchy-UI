@@ -1,9 +1,9 @@
 import { SheetContent, SheetTitle, SheetHeader } from "./SideSheet";
-import { ADD_MEMBER_FIELDS_CONFIG } from "../../config";
 import { FormData, Field } from "../../types/Fields.type";
 import { Chip } from "../Chip/Chip";
 import { Input } from "../Input/Input";
 import { Dropdown } from "../DropDown/DropDown";
+import { v4 as uuid } from "uuid";
 
 import { useState } from "react";
 
@@ -22,9 +22,8 @@ export const DynamicSheet = ({
 }: SheetPropsTypes) => {
   const [formData, setFormData] = useState<FormData>(initialState);
 
-  const handleInput = (key: string, value: string) => {
-    setFormData({ ...formData, [key]: value });
-    console.log(formData);
+  const handleInput = (key: string, value: string, teamId?: string) => {
+    setFormData({ ...formData, [key]: value, teamId: teamId || uuid() }); // Set teamId in formData
   };
 
   // this component dynamically return components acc to config
@@ -70,9 +69,9 @@ export const DynamicSheet = ({
       </SheetHeader>
       <button
         className="w-full mt-6 bg-[#333] rounded-lg p-2 text-white"
-        onClick={() => onSubmit(formData)}
+        onClick={() => onSubmit({ formData })}
       >
-        Add member
+        Add
       </button>
     </SheetContent>
   );

@@ -9,30 +9,36 @@ import { mapEmployeesByDepartment } from "../utils/mapEmployeesByDepartment";
 import { Sheet, SheetTrigger } from "../components/SideSheet/SideSheet";
 import { FormData } from "../types/Fields.type";
 
+// Home component
 export const Home = () => {
   const initialState: FormData = {
     name: "",
-    phoneNumber: "",
     email: "",
-    department: "",
+    phoneNumber: "",
     designation: "",
-    team: "choose a Team",
-    teamId: ""
+    deptId: "",
+    teamId: "",
   };
 
-  // handle add/edit new member
-  const onSubmitTeamMember = (formData) => {
-    console.log("HIII" ,formData);
-    dispatch({...formData , type: "ADD_MEMBER"},"HERW" )
+  const createTeamInitialState = {
+    teamName: "",
   };
 
   const { employeeData, dispatch } = useEmployeeData();
   const [employeeTransformedData, setEmployeeTransformedData] = useState({});
 
+  // handle add/edit new member
+  const onSubmitTeamMember = (formData) => {
+    dispatch({ ...formData, type: "ADD_MEMBER" });
+  };
+
+  const onSubmitCreateTeam = (formData) => {
+    console.log(formData);
+  };
+
   useEffect(() => {
     setEmployeeTransformedData(mapEmployeesByDepartment(employeeData));
   }, [employeeData]);
-  console.log("employeeTransformedData", employeeTransformedData);
 
   return (
     <main className="flex justify-center items-center flex-wrap gap-3">
@@ -57,8 +63,8 @@ export const Home = () => {
                   <DynamicSheet
                     department={department}
                     config={CREATE_TEAM_CONFIG}
-                    initialState={initialState}
-                    onSubmit={onSubmitTeamMember}
+                    initialState={createTeamInitialState}
+                    onSubmit={onSubmitCreateTeam}
                   />
                 </Sheet>
               </div>

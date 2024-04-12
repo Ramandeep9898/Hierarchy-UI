@@ -27,16 +27,32 @@ export const Dropdown = ({
   dept?: string;
 }) => {
   const [selectedValue, setSelectedValue] = useState(initialDropdownValue);
+  const [selectedTeamId, setSelectedTeamId] = useState(""); // State to store the selected teamId
   const { employeeData, dispatch } = useEmployeeData();
-  const [teamData, setTeamData] = useState([])
+  const [teamData, setTeamData] = useState([]);
+
   useEffect(() => {
-    const { department } = employeeData
+    const { department } = employeeData;
     if (initialDropdownValue === "Choose a Team") {
-      /// create array of all the team in this department {department}
-      setTeamData(getTeamByDepartmentName(dept as string, employeeData))
-      console.log("TEAM_DATA", teamData)
+      // Create an array of all the teams in this department {department}
+      setTeamData(getTeamByDepartmentName(dept as string, employeeData));
     }
   }, [employeeData]);
+
+  console.log("teamData", teamData);
+
+  const handleSelect = (teamName: string) => {
+    let teamId;
+    teamData.map((ele) => {
+      if (ele.teamName === teamName) {
+        return (teamId = ele.teamId);
+      }
+    });
+    console.log(teamId);
+    setSelectedValue(teamName);
+    onSelect(name, teamName, teamId);
+  };
+
   return (
     <DropdownMenu>
       <div className="flex flex-col items-start w-full">
@@ -51,15 +67,14 @@ export const Dropdown = ({
         <DropdownMenuRadioGroup
           value={selectedValue}
           onValueChange={(value) => {
-            setSelectedValue(value);
-            onSelect(name, value);
+            handleSelect(value); // Pass teamName and teamId to handleSelect
           }}
         >
-
-       {teamData.map((field) => (
-            <DropdownMenuRadioItem value={field.teamName}>{field.teamName}</DropdownMenuRadioItem>
+          {teamData.map((field) => (
+            <DropdownMenuRadioItem value={field.teamName} key={field.teamId}>
+              {field.teamName}
+            </DropdownMenuRadioItem>
           ))}
-
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
