@@ -3,7 +3,7 @@ import { ADD_MEMBER_FIELDS_CONFIG } from "../../config";
 import { FormData, Field } from "../../types/Fields.type";
 import { Chip } from "../Chip/Chip";
 import { Input } from "../Input/Input";
-import { Dropdown } from "../DropDown/Dropdown";
+import { Dropdown } from "../DropDown/DropDown";
 
 import { useState } from "react";
 
@@ -38,7 +38,7 @@ export const DynamicSheet = ({
           name={formData[field.name]}
           initialDropdownValue={field.initialDropdownValue}
           onSelect={handleInput}
-          department={department}
+          dept={department}
         />
       ),
       input: (

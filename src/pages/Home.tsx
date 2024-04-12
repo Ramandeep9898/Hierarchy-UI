@@ -13,15 +13,17 @@ export const Home = () => {
   const initialState: FormData = {
     name: "",
     phoneNumber: "",
-    emailId: "",
+    email: "",
     department: "",
     designation: "",
     team: "choose a Team",
+    teamId: ""
   };
 
   // handle add/edit new member
   const onSubmitTeamMember = (formData) => {
-    console.log(formData);
+    console.log("HIII" ,formData);
+    dispatch({...formData , type: "ADD_MEMBER"},"HERW" )
   };
 
   const { employeeData, dispatch } = useEmployeeData();

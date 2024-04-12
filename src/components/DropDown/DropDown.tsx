@@ -9,26 +9,34 @@ import {
   DropdownMenuTrigger,
 } from "./DropDown.components";
 
+import { useEmployeeData } from "../../hooks/employeeDataContext";
+
+import { getTeamByDepartmentName } from "../../utils/datamodelutils";
+
 export const Dropdown = ({
   label,
   initialDropdownValue,
   onSelect,
   name,
-  department,
+  dept,
 }: {
   label: string;
   initialDropdownValue: string;
   onSelect: any;
   name: string;
-  department?: string;
+  dept?: string;
 }) => {
   const [selectedValue, setSelectedValue] = useState(initialDropdownValue);
-
+  const { employeeData, dispatch } = useEmployeeData();
+  const [teamData, setTeamData] = useState([])
   useEffect(() => {
-    if (initialDropdownValue === "Choose a team") {
+    const { department } = employeeData
+    if (initialDropdownValue === "Choose a Team") {
       /// create array of all the team in this department {department}
+      setTeamData(getTeamByDepartmentName(dept as string, employeeData))
+      console.log("TEAM_DATA", teamData)
     }
-  }, []);
+  }, [employeeData]);
   return (
     <DropdownMenu>
       <div className="flex flex-col items-start w-full">
@@ -47,9 +55,11 @@ export const Dropdown = ({
             onSelect(name, value);
           }}
         >
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+
+       {teamData.map((field) => (
+            <DropdownMenuRadioItem value={field.teamName}>{field.teamName}</DropdownMenuRadioItem>
+          ))}
+
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -15,7 +15,7 @@ export const ADD_MEMBER_FIELDS_CONFIG = [
     required: true,
   },
   {
-    name: "emailId",
+    name: "email",
     label: "Email",
     inputType: "email",
 

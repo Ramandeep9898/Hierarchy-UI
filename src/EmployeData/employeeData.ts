@@ -3,15 +3,19 @@ import { v4 as uuid } from "uuid";
 export const department = {
   "hr715d74-3241-48aa-8e0a-995029a76668": {
     deptName: "HR",
+    deptId: "hr715d74-3241-48aa-8e0a-995029a76668"
   },
   "er715d74-3241-48aa-8e0a-995029a76668": {
     deptName: "ENGINEERING",
+    deptId: "er715d74-3241-48aa-8e0a-995029a76668"
   },
   "de715d74-3241-48aa-8e0a-995029a76668": {
     deptName: "DESIGN",
+    deptId: "de715d74-3241-48aa-8e0a-995029a76668"
   },
   "ls715d74-3241-48aa-8e0a-995029d76668": {
     deptName: "LEADERSHIP",
+    deptId: "ls715d74-3241-48aa-8e0a-995029d76668"
   },
 };
 
@@ -19,15 +23,24 @@ export const teams = {
   "ba715d74-3241-48aa-8e0a-995029f76668": {
     teamName: "Hello World!",
     deptId: "er715d74-3241-48aa-8e0a-995029a76668",
+    teamId: "ba715d74-3241-48aa-8e0a-995029f76668"
   },
   "cc715d74-3241-48aa-8e0a-995029f76668": {
     teamName: "Hello HR!",
     deptId: "er715d74-3241-48aa-8e0a-995029a76668",
+    teamId: "cc715d74-3241-48aa-8e0a-995029f76668"
   },
   "pp715d74-3241-48aa-8e0a-995029f76668": {
     teamName: "Hello design!",
     deptId: "er715d74-3241-48aa-8e0a-995029a76668",
+    teamId: "pp715d74-3241-48aa-8e0a-995029f76668"
   },
+  "pp715d74-3241-48aa-8e0a-995029f76998": {
+    teamName: "Hello LEADERS!",
+    deptId: "ls715d74-3241-48aa-8e0a-995029d76668",
+    teamId: "pp715d74-3241-48aa-8e0a-995029f76998"
+  },
+  
 };
 
 export const employees = [
