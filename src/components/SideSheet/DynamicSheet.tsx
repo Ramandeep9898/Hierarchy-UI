@@ -19,11 +19,21 @@ export const DynamicSheet = ({
   config,
   initialState,
   onSubmit,
+  flag,
 }: SheetPropsTypes) => {
   const [formData, setFormData] = useState<FormData>(initialState);
 
   const handleInput = (key: string, value: string, teamId?: string) => {
-    setFormData({ ...formData, [key]: value, teamId: teamId || uuid() }); // Set teamId in formData
+    if (flag === "createTeam") {
+      setFormData({
+        ...formData,
+        [key]: value,
+        teamId: teamId || uuid(),
+        department: department,
+      }); // Set teamId in formData
+    } else {
+      setFormData({ ...formData, [key]: value, teamId: teamId || uuid() }); // Set teamId in formData
+    }
   };
 
   // this component dynamically return components acc to config

@@ -57,6 +57,7 @@ export const Home = () => {
                     </SheetTrigger>
                     <DynamicSheet
                       department={department}
+                      flag="addMember"
                       config={ADD_MEMBER_FIELDS_CONFIG}
                       initialState={initialState}
                       onSubmit={onSubmitTeamMember}
@@ -69,6 +70,7 @@ export const Home = () => {
                     </SheetTrigger>
                     <DynamicSheet
                       department={department}
+                      flag="createTeam"
                       config={CREATE_TEAM_CONFIG}
                       initialState={createTeamInitialState}
                       onSubmit={onSubmitCreateTeam}
