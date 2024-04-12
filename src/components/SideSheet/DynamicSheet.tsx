@@ -38,6 +38,7 @@ export const DynamicSheet = ({
           name={formData[field.name]}
           initialDropdownValue={field.initialDropdownValue}
           onSelect={handleInput}
+          department={department}
         />
       ),
       input: (
