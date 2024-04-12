@@ -26,11 +26,11 @@ export const getTeamByDeptId = (deptId: string, employeeData: any) => {
 };
 
 export const addMember = (memberData, employeeData) => {
-  console.log("memberData Id", memberData.teamId);
-  console.log("employeeData", employeeData);
+  "memberData Id", memberData.teamId;
+  "employeeData", employeeData;
   const { teams, employees } = employeeData;
   const departmentId = teams[memberData?.teamId]?.deptId;
-  console.log("departmentId", departmentId);
+  "departmentId", departmentId;
 
   // Construct the new member object with all required properties
   const newMember = {
@@ -47,32 +47,30 @@ export const addMember = (memberData, employeeData) => {
   // Push the new member object to the employees array
   employees.push(newMember);
 
-  console.log("New Member Added:", employees, memberData);
+  "New Member Added:", employees, memberData;
 };
 
-
 export const createTeam = (teamData, employeeData) => {
-    console.log("teamData Id", teamData.teamId);
-    console.log("employeeData", employeeData);
-    const { teams, department } = employeeData;
-    const departmentId = getDepartmentByDeptName(teamData.department, department);
-    console.log("departmentId", departmentId);
-  
-    // Construct the new team object with all required properties
-    const newTeam = {...teamData, deptId: departmentId};
-  
-    // Push the new team object to the employees array
-    teams[teamData.teamId] = newTeam;
-  
-    console.log("New team Added:", teams, teamData);
-  };
-  
+  "teamData Id", teamData.teamId;
+  "employeeData", employeeData;
+  const { teams, department } = employeeData;
+  const departmentId = getDepartmentByDeptName(teamData.department, department);
+  "departmentId", departmentId;
 
-  export const getDepartmentByDeptName = (deptName, department) => {
-    for (let key of Object.keys(department)) {
-        let data = department[key];
-        if (deptName === data.deptName) {
-          return key;
-        }
-      }
+  // Construct the new team object with all required properties
+  const newTeam = { ...teamData, deptId: departmentId };
+
+  // Push the new team object to the employees array
+  teams[teamData.teamId] = newTeam;
+
+  "New team Added:", teams, teamData;
+};
+
+export const getDepartmentByDeptName = (deptName, department) => {
+  for (let key of Object.keys(department)) {
+    let data = department[key];
+    if (deptName === data.deptName) {
+      return key;
+    }
   }
+};

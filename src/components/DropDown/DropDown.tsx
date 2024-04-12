@@ -33,17 +33,14 @@ export const Dropdown = ({
 
   useEffect(() => {
     const { department } = employeeData;
-    console.log("HERE_AGAIN" , initialDropdownValue);
-    
+
     if (initialDropdownValue === "Choose a Team") {
       // Create an array of all the teams in this department {department}
-      console.log("HERE_PRB" , dept);
-      
+      console.log(dept, employeeData);
+
       setTeamData(getTeamByDepartmentName(dept as string, employeeData));
     }
   }, [employeeData]);
-
-  console.log("teamData", teamData);
 
   const handleSelect = (teamName: string) => {
     let teamId;
@@ -52,7 +49,7 @@ export const Dropdown = ({
         return (teamId = ele.teamId);
       }
     });
-    console.log(teamId);
+    teamId;
     setSelectedValue(teamName);
     onSelect(name, teamName, teamId);
   };
@@ -74,7 +71,7 @@ export const Dropdown = ({
             handleSelect(value); // Pass teamName and teamId to handleSelect
           }}
         >
-          {teamData.map((field) => (
+          {teamData?.map((field) => (
             <DropdownMenuRadioItem value={field.teamName} key={field.teamId}>
               {field.teamName}
             </DropdownMenuRadioItem>

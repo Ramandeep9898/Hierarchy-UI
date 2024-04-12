@@ -23,10 +23,10 @@ const employeeReducerFunc = (state, action) => {
         ...state,
         teams: state.teams, // Make a copy of the employees array
       };
-      console.log("CTT", action.formData);
-      
+      "CTT", action.formData;
+
       createTeam(action.formData, updatedStateTeam); // Pass memberData and updatedState
-      return updatedStateTeam; // Return the updated state      
+      return updatedStateTeam; // Return the updated state
     default:
       return state;
   }

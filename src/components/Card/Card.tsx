@@ -1,9 +1,13 @@
 import { department, teams } from "../../EmployeData/employeeData";
 import clsxm from "../../utils/clsxm";
 import Button from "../Button/Button";
+import { Sheet, SheetTrigger } from "../SideSheet/SideSheet";
+import { DynamicSheet } from "../SideSheet/DynamicSheet";
+import { ADD_MEMBER_FIELDS_CONFIG } from "../../config";
 
 export const Card = ({ info }) => {
-  console.log(info);
+  console.log("info", info);
+
   return (
     <div
       className={clsxm(
@@ -21,12 +25,24 @@ export const Card = ({ info }) => {
               {info.email}· {info.phoneNumber}
             </h2>
           </div>
-          <Button
-            variant="outline"
-            className="border-[#333] border-2 px-2 py-1 rounded"
-          >
-            edit
-          </Button>
+
+          <Sheet>
+            <SheetTrigger>
+              <Button
+                variant="outline"
+                className="border-[#333] border-2 px-2 py-1 rounded"
+              >
+                edit
+              </Button>
+            </SheetTrigger>
+            <DynamicSheet
+              department={info.departmentName}
+              flag="addMember"
+              config={ADD_MEMBER_FIELDS_CONFIG}
+              initialState={info}
+              onSubmit={() => "fghj"}
+            />
+          </Sheet>
         </div>
 
         <div className="flex gap-2 flex-wrap mt-2">

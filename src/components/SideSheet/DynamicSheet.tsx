@@ -12,6 +12,7 @@ type SheetPropsTypes = {
   config: any;
   initialState: any;
   onSubmit: any;
+  flag: string;
 };
 
 export const DynamicSheet = ({
@@ -22,13 +23,13 @@ export const DynamicSheet = ({
   flag,
 }: SheetPropsTypes) => {
   const [formData, setFormData] = useState<FormData>(initialState);
-
+  console.log(initialState);
   const handleInput = (key: string, value: string, teamId?: string) => {
     if (flag === "createTeam") {
       setFormData({
         ...formData,
         [key]: value,
-        teamId: teamId || uuid(),
+        teamId: uuid(),
         department: department,
       }); // Set teamId in formData
     } else {
@@ -45,7 +46,7 @@ export const DynamicSheet = ({
         <Dropdown
           label={field.label}
           name={formData[field.name]}
-          initialDropdownValue={field.initialDropdownValue}
+          initialDropdownValue={field?.initialDropdownValue}
           onSelect={handleInput}
           dept={department}
         />
@@ -70,7 +71,7 @@ export const DynamicSheet = ({
       <SheetHeader>
         <SheetTitle>Add new Member to {department}</SheetTitle>
         <div className="flex flex-col gap-8">
-          {config.map((field) => (
+          {config.map((field: any) => (
             <div className="" key={field.name}>
               {DynamicComponentReturn({ field })}
             </div>
