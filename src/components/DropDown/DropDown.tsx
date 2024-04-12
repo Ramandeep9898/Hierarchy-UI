@@ -33,8 +33,12 @@ export const Dropdown = ({
 
   useEffect(() => {
     const { department } = employeeData;
+    console.log("HERE_AGAIN" , initialDropdownValue);
+    
     if (initialDropdownValue === "Choose a Team") {
       // Create an array of all the teams in this department {department}
+      console.log("HERE_PRB" , dept);
+      
       setTeamData(getTeamByDepartmentName(dept as string, employeeData));
     }
   }, [employeeData]);

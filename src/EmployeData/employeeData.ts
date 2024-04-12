@@ -21,18 +21,18 @@ export const department = {
 
 export const teams = {
   "ba715d74-3241-48aa-8e0a-995029f76668": {
-    teamName: "Hello World!",
+    teamName: "Hello Enginners!",
     deptId: "er715d74-3241-48aa-8e0a-995029a76668",
     teamId: "ba715d74-3241-48aa-8e0a-995029f76668"
   },
   "cc715d74-3241-48aa-8e0a-995029f76668": {
     teamName: "Hello HR!",
-    deptId: "er715d74-3241-48aa-8e0a-995029a76668",
+    deptId: "hr715d74-3241-48aa-8e0a-995029a76668",
     teamId: "cc715d74-3241-48aa-8e0a-995029f76668"
   },
   "pp715d74-3241-48aa-8e0a-995029f76668": {
     teamName: "Hello design!",
-    deptId: "er715d74-3241-48aa-8e0a-995029a76668",
+    deptId: "de715d74-3241-48aa-8e0a-995029a76668",
     teamId: "pp715d74-3241-48aa-8e0a-995029f76668"
   },
   "pp715d74-3241-48aa-8e0a-995029f76998": {
