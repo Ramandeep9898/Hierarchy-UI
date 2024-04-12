@@ -8,6 +8,7 @@ import { mapEmployeesByDepartment } from "../utils/mapEmployeesByDepartment";
 
 import { Sheet, SheetTrigger } from "../components/SideSheet/SideSheet";
 import { FormData } from "../types/Fields.type";
+import Button from "../components/Button/Button";
 
 // Home component
 export const Home = () => {
@@ -45,11 +46,13 @@ export const Home = () => {
       <div className="flex flex-col">
         {Object.keys(employeeTransformedData).map((department) => (
           <div key={department} className="mb-5">
-            <div className="flex justify-between mb-1">
-              <h2>{department}</h2>
+            <div className="flex justify-between mb-3">
+              <h2 className="text-2xl font-bold underline ">{department}</h2>
               <div className="flex gap-3">
                 <Sheet>
-                  <SheetTrigger>Add New Team Member</SheetTrigger>
+                  <SheetTrigger>
+                    <Button variant="primary">Add New Team Member +</Button>
+                  </SheetTrigger>
                   <DynamicSheet
                     department={department}
                     config={ADD_MEMBER_FIELDS_CONFIG}
@@ -59,7 +62,9 @@ export const Home = () => {
                 </Sheet>
 
                 <Sheet>
-                  <SheetTrigger>Create Team</SheetTrigger>
+                  <SheetTrigger>
+                    <Button variant="primary">Create New Team +</Button>
+                  </SheetTrigger>
                   <DynamicSheet
                     department={department}
                     config={CREATE_TEAM_CONFIG}
@@ -70,7 +75,7 @@ export const Home = () => {
               </div>
             </div>
 
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 flex-wrap">
               {employeeTransformedData[department].map((employee: any) => (
                 <div key={employee.employeeId}>
                   <Card info={employee} />

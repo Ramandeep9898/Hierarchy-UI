@@ -49,9 +49,11 @@ export const Card = ({ info }) => {
               </Button>
             </>
           )}
-          <Button variant="primary" className="">
-            View team
-          </Button>
+          {info.designation === "TEAM_LEAD" && (
+            <Button variant="primary" className="">
+              View team
+            </Button>
+          )}
         </div>
       )}
     </div>
