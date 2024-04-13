@@ -15,6 +15,9 @@ export const Card = ({ info }) => {
     // dispatch
     dispatch({ empId: info.employeeId, type: "REMOVE_MEMBER" });
   };
+
+  console.log("p", info);
+
   return (
     <div
       className={clsxm(

@@ -23,7 +23,7 @@ export const DynamicSheet = ({
   onSubmit,
   flag,
 }: SheetPropsTypes) => {
-  const { employeeData, dispatch } = useEmployeeData();
+  const { dispatch } = useEmployeeData();
 
   const [formData, setFormData] = useState<FormData>(initialState);
   const handleInput = (key: string, value: string, teamId?: string) => {
@@ -33,9 +33,9 @@ export const DynamicSheet = ({
         [key]: value,
         teamId: uuid(),
         department: department,
-      }); // Set teamId in formData
+      });
     } else {
-      setFormData({ ...formData, [key]: value, teamId: teamId || uuid() }); // Set teamId in formData
+      setFormData({ ...formData, [key]: value, teamId: teamId || uuid() });
     }
   };
 
