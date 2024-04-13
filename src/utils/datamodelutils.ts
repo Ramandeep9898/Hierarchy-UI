@@ -75,7 +75,7 @@ export const updateMember = (memberData, employeeData) => {
         if(employees[index].employeeId === memberData.employeeId){
             employees[index] = memberData
         }
-        if(employees[index].designation === "TEAM_LEAD" && memberData.designation === "TEAM_LEAD" && employees[index].employeeId !== memberData.employeeId){
+        if(employees[index].designation === "TEAM_LEAD" && memberData.designation === "TEAM_LEAD" && employees[index].employeeId !== memberData.employeeId && employees[index].teamId !== memberData.teamId){
             employees[index]['designation'] = "TEAM_MEMBER"
         }
         
