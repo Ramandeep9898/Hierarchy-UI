@@ -1,6 +1,6 @@
 import { useContext, createContext, useReducer } from "react";
 import { employees, teams, department } from "../EmployeData/employeeData";
-import { addMember, createTeam } from "../utils/datamodelutils";
+import { addMember, createTeam, updateMember, removeMember } from "../utils/datamodelutils";
 
 const employeeReducerFunc = (state, action) => {
   switch (action.type) {
@@ -23,10 +23,29 @@ const employeeReducerFunc = (state, action) => {
         ...state,
         teams: state.teams, // Make a copy of the employees array
       };
-      "CTT", action.formData;
-
       createTeam(action.formData, updatedStateTeam); // Pass memberData and updatedState
       return updatedStateTeam; // Return the updated state
+    case "EDIT_MEMBER":
+      // Call addMember function with proper arguments
+      const updatedStateMember = {
+        ...state,
+        employees: [...state.employees], // Make a copy of the employees array
+      };
+      console.log("UFD" , action);
+      
+      updateMember(action, updatedStateMember); // Pass memberData and updatedState
+      return updatedStateMember; // Return the updated state
+    
+    case "REMOVE_MEMBER": 
+      // Call addMember function with proper arguments
+      const updatedStateMemberRemove = {
+        ...state,
+        employees: [...state.employees], // Make a copy of the employees array
+      };
+      
+      removeMember(action, updatedStateMemberRemove); // Pass memberData and updatedState
+      return updatedStateMemberRemove; // Return the updated state
+    
     default:
       return state;
   }

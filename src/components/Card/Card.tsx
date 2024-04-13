@@ -13,6 +13,7 @@ export const Card = ({ info }) => {
   const removeHandler = () => {
     console.log(info.employeeId);
     // dispatch
+    dispatch({ empId: info.employeeId, type: "REMOVE_MEMBER" });
   };
   return (
     <div

@@ -26,11 +26,9 @@ export const getTeamByDeptId = (deptId: string, employeeData: any) => {
 };
 
 export const addMember = (memberData, employeeData) => {
-  "memberData Id", memberData.teamId;
-  "employeeData", employeeData;
+  console.log("ADD_MEMBER" , memberData)
   const { teams, employees } = employeeData;
   const departmentId = teams[memberData?.teamId]?.deptId;
-  "departmentId", departmentId;
 
   // Construct the new member object with all required properties
   const newMember = {
@@ -48,7 +46,6 @@ export const addMember = (memberData, employeeData) => {
   employees.push(newMember);
   localStorage.setItem("employees", JSON.stringify(employees));
 
-  "New Member Added:", employees, memberData;
 };
 
 export const createTeam = (teamData, employeeData) => {
@@ -71,3 +68,31 @@ export const getDepartmentByDeptName = (deptName, department) => {
     }
   }
 };
+
+export const updateMember = (memberData, employeeData) => {
+    const { employees } = employeeData;
+    for(let index in employees){
+        if(employees[index].employeeId === memberData.employeeId){
+            employees[index] = memberData
+        }
+        if(employees[index].designation === "TEAM_LEAD" && memberData.designation === "TEAM_LEAD" && employees[index].employeeId !== memberData.employeeId){
+            employees[index]['designation'] = "TEAM_MEMBER"
+        }
+        
+    }
+    localStorage.setItem("employees", JSON.stringify(employees));
+    console.log("UPDATE_MEMBER" , memberData)
+}
+
+export const removeMember = (memberData, employeeData) => {
+    console.log("REMOVE_MEMBER", memberData)
+    const { employees } = employeeData;
+    for(let index in employees){
+        if(employees[index].employeeId === memberData.empId){
+            employees[index]['isDeleted'] = true
+            break
+        }
+    }
+    localStorage.setItem("employees", JSON.stringify(employees));
+    console.log("REMOVE_MEMBER" , memberData)
+}
