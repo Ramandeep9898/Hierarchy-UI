@@ -5,6 +5,7 @@ import { Card } from "../components/Card/Card";
 import { useEmployeeData } from "../hooks/employeeDataContext";
 import { DynamicSheet } from "../components/SideSheet/DynamicSheet";
 import { mapEmployeesByDepartment } from "../utils/mapEmployeesByDepartment";
+import { Filters } from "../components/Filters/Filters";
 
 import { Sheet, SheetTrigger } from "../components/SideSheet/SideSheet";
 import { FormData } from "../types/Fields.type";
@@ -35,18 +36,17 @@ export const Home = () => {
 
   /// create new team
   const onSubmitCreateTeam = (formData) => {
-    "TEAM_CREATE", formData;
     dispatch({ ...formData, type: "CREATE_TEAM" });
   };
 
   useEffect(() => {
     setEmployeeTransformedData(mapEmployeesByDepartment(employeeData));
   }, [employeeData]);
-  console.log(employeeTransformedData);
 
   return (
     <main className="flex justify-center items-center flex-wrap gap-3 ">
       <div className="flex flex-col max-w-[1200px]">
+        <Filters />
         {Object.keys(employeeTransformedData).map((department) => (
           <div key={department} className="mb-5">
             <div className="flex justify-between mb-3">
